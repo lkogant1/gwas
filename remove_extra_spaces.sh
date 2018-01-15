@@ -1,4 +1,4 @@
-#!/bin/csh
+#!/bin/bash
 
 cat $* | tr '\t' ' ' | sed 's/^ *//;s/ *$//;s/  */ /g'
 
