@@ -12,17 +12,17 @@ cp hg18ToHg19.over.chain /PATH/hapmap3_pop/Liftover_YRI
 
 ##PREP YRI plink files for liftover
 #liftover file has chromosome number, start position, end position, and  SNP name.
-~/correct_spaces ../hapmap3_r2_b36_fwd.YRI.qc.poly.map | cut -d ' ' -f1,2,4 | sed 's/^/chr/g' | awk '{print $1,$2,$3,$3}' | awk '{$4++; print$0}' | awk '{print $1,$3,$4,$2}' | sed 's/chr23/chrX/g' | sed 's/chr24/chrY/g' > prep_liftover_yri
+~/remove_extra_spaces.sh ../hapmap3_r2_b36_fwd.YRI.qc.poly.map | cut -d ' ' -f1,2,4 | sed 's/^/chr/g' | awk '{print $1,$2,$3,$3}' | awk '{$4++; print$0}' | awk '{print $1,$3,$4,$2}' | sed 's/chr23/chrX/g' | sed 's/chr24/chrY/g' > prep_liftover_yri
 
 #RUN LIFTOVER
 ./liftOver prep_liftover_yri hg18ToHg19.over.chain yri_liftover_hg19 yri_liftover_unmapped
 
 ##UPDATE plink files
-egrep -v "#" yri_liftover_unmapped | ~/correct_spaces | cut -d ' ' -f4 > yri_drop_unmapped_snps
-~/correct_spaces yri_liftover_hg19 | cut -d ' ' -f2,4 | awk '{print $2,$1}' > yri_map_update
+egrep -v "#" yri_liftover_unmapped | ~/remove_extra_spaces.sh | cut -d ' ' -f4 > yri_drop_unmapped_snps
+~/remove_extra_spaces.sh yri_liftover_hg19 | cut -d ' ' -f2,4 | awk '{print $2,$1}' > yri_map_update
 module load plink2/b3q
 plink --memory 30000 --file ../hapmap3_r2_b36_fwd.YRI.qc.poly --exclude yri_drop_unmapped_snps --update-map yri_map_update --make-bed --out Hapmap3_hg19_YRI_a
-~/correct_spaces yri_liftover_hg19 | cut -d' ' -f4 > yri_keep_snps
+~/remove_extra_spaces.sh yri_liftover_hg19 | cut -d' ' -f4 > yri_keep_snps
 plink --bfile Hapmap3_hg19_YRI_a --extract yri_keep_snps --make-bed --out Hapmap3_hg19_YRI_01122016
 
 
@@ -34,15 +34,15 @@ cp /PATH/Public_Data/hapmap3_pop/Liftover_YRI/Prep_YRI_Liftover_Files/hg18ToHg19
 
 #PREP CEU plink files for liftover
 #liftover file has chromosome number, start position, end position, and  SNP name.
-~/correct_spaces ../hapmap3_r2_b36_fwd.CEU.qc.poly.map | cut -d ' ' -f1,2,4 | sed 's/^/chr/g' | awk '{print $1,$2,$3,$3}' | awk '{$4++; print$0}' | awk '{print $1,$3,$4,$2}' | sed 's/chr23/chrX/g' | sed 's/chr24/chrY/g' > prep_liftover_ceu
+~/remove_extra_spaces.sh ../hapmap3_r2_b36_fwd.CEU.qc.poly.map | cut -d ' ' -f1,2,4 | sed 's/^/chr/g' | awk '{print $1,$2,$3,$3}' | awk '{$4++; print$0}' | awk '{print $1,$3,$4,$2}' | sed 's/chr23/chrX/g' | sed 's/chr24/chrY/g' > prep_liftover_ceu
 
 #RUN LIFTOVER
 ./liftOver prep_liftover_ceu hg18ToHg19.over.chain ceu_liftover_hg19 ceu_liftover_unmapped
 
 ##UPDATE plink files
-egrep -v "#" ceu_liftover_unmapped | ~/correct_spaces | cut -d ' ' -f4 > ceu_drop_unmapped_snps
-~/correct_spaces ceu_liftover_hg19 | cut -d' ' -f4 > ceu_keep_snps
-~/correct_spaces ceu_liftover_hg19 | cut -d ' ' -f2,4 | awk '{print $2,$1}' > ceu_map_update
+egrep -v "#" ceu_liftover_unmapped | ~/remove_extra_spaces.sh | cut -d ' ' -f4 > ceu_drop_unmapped_snps
+~/remove_extra_spaces.sh ceu_liftover_hg19 | cut -d' ' -f4 > ceu_keep_snps
+~/remove_extra_spaces.sh ceu_liftover_hg19 | cut -d ' ' -f2,4 | awk '{print $2,$1}' > ceu_map_update
 
 module load plink2/b3q
 plink --memory 30000 --file ../hapmap3_r2_b36_fwd.CEU.qc.poly --exclude ceu_drop_unmapped_snps --update-map ceu_map_update --make-bed --out Hapmap3_hg19_CEU_a
@@ -56,15 +56,15 @@ cp /PATH/Public_Data/hapmap3_pop/Liftover_YRI/Prep_YRI_Liftover_Files/hg18ToHg19
 
 #PREP JPT plink files for liftover
 #liftover file has chromosome number, start position, end position, and  SNP name.
-~/correct_spaces ../hapmap3_r2_b36_fwd.JPT.qc.poly.map | cut -d ' ' -f1,2,4 | sed 's/^/chr/g' | awk '{print $1,$2,$3,$3}' | awk '{$4++; print$0}' | awk '{print $1,$3,$4,$2}' | sed 's/chr23/chrX/g' | sed 's/chr24/chrY/g' > prep_liftover_jpt
+~/remove_extra_spaces.sh ../hapmap3_r2_b36_fwd.JPT.qc.poly.map | cut -d ' ' -f1,2,4 | sed 's/^/chr/g' | awk '{print $1,$2,$3,$3}' | awk '{$4++; print$0}' | awk '{print $1,$3,$4,$2}' | sed 's/chr23/chrX/g' | sed 's/chr24/chrY/g' > prep_liftover_jpt
 
 #RUN LIFTOVER
 ./liftOver prep_liftover_jpt hg18ToHg19.over.chain jpt_liftover_hg19 jpt_liftover_unmapped
 
 ##UPDATE plink files
-egrep -v "#" jpt_liftover_unmapped | ~/correct_spaces | cut -d ' ' -f4 > jpt_drop_unmapped_snps
-~/correct_spaces jpt_liftover_hg19 | cut -d' ' -f4 > jpt_keep_snps
-~/correct_spaces jpt_liftover_hg19 | cut -d ' ' -f2,4 | awk '{print $2,$1}' > jpt_map_update
+egrep -v "#" jpt_liftover_unmapped | ~/remove_extra_spaces.sh | cut -d ' ' -f4 > jpt_drop_unmapped_snps
+~/remove_extra_spaces.sh jpt_liftover_hg19 | cut -d' ' -f4 > jpt_keep_snps
+~/remove_extra_spaces.sh jpt_liftover_hg19 | cut -d ' ' -f2,4 | awk '{print $2,$1}' > jpt_map_update
 
 module load plink2/b3q
 plink --memory 30000 --file ../hapmap3_r2_b36_fwd.JPT.qc.poly --exclude jpt_drop_unmapped_snps --update-map jpt_map_update --make-bed --out Hapmap3_hg19_JPT_a
@@ -72,9 +72,9 @@ plink --bfile  Hapmap3_hg19_JPT_a --extract jpt_keep_snps --make-bed --out Hapma
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 #CREATE A MERGED GENOTYPE FILE WITH SAMPLES AND HAPMAP POPS - USING COMMONG SNPS
-~/correct_spaces Hapmap3_hg19_YRI_01122016.bim > yri.bim
-~/correct_spaces Hapmap3_hg19_JPT_01122016.bim > jpt.bim
-~/correct_spaces  Hapmap3_hg19_CEU_01122016.bim > ceu.bim
+~/remove_extra_spaces.sh Hapmap3_hg19_YRI_01122016.bim > yri.bim
+~/remove_extra_spaces.sh Hapmap3_hg19_JPT_01122016.bim > jpt.bim
+~/remove_extra_spaces.sh  Hapmap3_hg19_CEU_01122016.bim > ceu.bim
 
 #get common snps between hapmap pops
 cut -d ' ' -f2 yri.bim | sort > yri_snps
@@ -88,10 +88,10 @@ comm -12 yri_snps jpt_snps | comm -12 - ceu_snps > common_snps
 
 
 #get common snps between yri, jpt, ceu and genotyped files
-~/correct_spaces SAMPLE1_shapeit.bim | cut -d ' ' -f2 | sort > SAMPLE1_genotyped_snps
+~/remove_extra_spaces.sh SAMPLE1_shapeit.bim | cut -d ' ' -f2 | sort > SAMPLE1_genotyped_snps
 comm -12 common_snps_ceu_yri_jpt SAMPLE1_genotyped_snps > common_snps_ceu_yri_jpt_SAMPLE1
 
-~/correct_spaces SAMPLE2_12292015_shapeit.bim | cut -d ' ' -f2 | sort > SAMPLE2_genotyped
+~/remove_extra_spaces.sh SAMPLE2_12292015_shapeit.bim | cut -d ' ' -f2 | sort > SAMPLE2_genotyped
 comm -12 common_snps_ceu_yri_jpt_SAMPLE1genotyped SAMPLE2_genotyped > common_snps_ceu_yri_jpt_SAMPLE1genotyped_SAMPLE2genotyped
 
 
@@ -165,11 +165,11 @@ plink --memory 30000 --bfile SAMPLE1_SAMPLE2_yri_jpt_ceu --extract plink.prune.i
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 #add phenotype
-~/correct_spaces ceu_common.fam | cut -d ' ' -f1,2 | sed 's/$/ 1/g' > ceu_p
-~/correct_spaces jpt_common.fam | cut -d ' ' -f1,2 | sed 's/$/ 2/g' > jpt_p
-~/correct_spaces yri_common.fam | cut -d ' ' -f1,2 | sed 's/$/ 3/g' > yri_p
-~/correct_spaces SAMPLE1_common.fam | cut -d ' ' -f1,2 | sed 's/$/ 4/g' > SAMPLE1_p
-~/correct_spaces SAMPLE2_common.fam | cut -d ' ' -f1,2 | sed 's/$/ 5/g' > SAMPLE2_p
+~/remove_extra_spaces.sh ceu_common.fam | cut -d ' ' -f1,2 | sed 's/$/ 1/g' > ceu_p
+~/remove_extra_spaces.sh jpt_common.fam | cut -d ' ' -f1,2 | sed 's/$/ 2/g' > jpt_p
+~/remove_extra_spaces.sh yri_common.fam | cut -d ' ' -f1,2 | sed 's/$/ 3/g' > yri_p
+~/remove_extra_spaces.sh SAMPLE1_common.fam | cut -d ' ' -f1,2 | sed 's/$/ 4/g' > SAMPLE1_p
+~/remove_extra_spaces.sh SAMPLE2_common.fam | cut -d ' ' -f1,2 | sed 's/$/ 5/g' > SAMPLE2_p
 cat ceu_p jpt_p yri_p SAMPLE1_p SAMPLE2_p > phenotype_all
 
 plink --bfile SAMPLE1_SAMPLE2_yri_jpt_ceu_pruned --pheno phenotype_all --make-bed --out SAMPLE1_SAMPLE2_yri_jpt_ceu_pruned_updated
@@ -185,7 +185,7 @@ cp run_eigenstrat /PATH/
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-~/correct_spaces eigen.pca.evec | cut -d ' ' -f2,3,12 > pc1_pc2_pop.txt
+~/remove_extra_spaces.sh eigen.pca.evec | cut -d ' ' -f2,3,12 > pc1_pc2_pop.txt
 egrep CEU pc1_pc2_pop.txt | cut -d ' ' -f1,2 > pc1_pc2.ceu
 egrep YRI pc1_pc2_pop.txt | cut -d ' ' -f1,2 > pc1_pc2.yri
 egrep JPT pc1_pc2_pop.txt | cut -d ' ' -f1,2 > pc1_pc2.jpt
@@ -195,7 +195,7 @@ egrep SAMPLE2 pc1_pc2_pop.txt | cut -d ' ' -f1,2 > pc1_pc2.SAMPLE2
 emacs -nw amp
 &
 
-~/correct_spaces eigen.pca.evec | cut -d ' ' -f2,3,12 > pc1_pc2_pop.txt
+~/remove_extra_spaces.sh eigen.pca.evec | cut -d ' ' -f2,3,12 > pc1_pc2_pop.txt
 
 egrep CEU pc1_pc2_pop.txt | cut -d ' ' -f1,2 > pc1_pc2.ceu
 egrep YRI pc1_pc2_pop.txt | cut -d ' ' -f1,2 > pc1_pc2.yri
@@ -213,7 +213,7 @@ cd /PATH/Data/dbGaP/Combined_Imputed_Datasets/Eigenstrat/Plots
 
 convert eigenplot.ps eigenplot.png
 
-~/correct_spaces eigen.pca.evec | egrep 'SAMPLE1|SAMPLE2' | cut -d ' ' -f1-3 | sed 's/:/ /g' > pc1_pc2_components
+~/remove_extra_spaces.sh eigen.pca.evec | egrep 'SAMPLE1|SAMPLE2' | cut -d ' ' -f1-3 | sed 's/:/ /g' > pc1_pc2_components
 #add header: famid iid pc1 pc2 
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
