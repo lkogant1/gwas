@@ -1,0 +1,38 @@
+#!/bin/csh
+
+# submit jobs where ".shapeitlog" doesn't already exist
+# then create .shapeitlog with the jobid
+# pass in starting base directory and run 'start'
+
+set max=50
+set x=0
+
+
+foreach file (chr*/start_shapeit)
+   set dir=`echo $file  | sed 's|/.*||'`
+echo FILE $file
+echo DIR $dir
+
+   echo -n Checking $dir ' '
+
+   if ($x == $max) then
+        echo Max reached
+   else
+
+     if (-e $dir/$dir.shapeitlog) then 
+	echo shapeitlog exists for $dir
+
+     else
+        echo bsub  $dir/start_shapeit
+
+        set x=`expr $x + 1`
+
+	cd ./$dir
+#	bsub  < start_shapeit |& tee $dir/$dir.shapeitlog
+	cd ..
+#	sleep 1 
+
+     endif
+   endif
+end
+
