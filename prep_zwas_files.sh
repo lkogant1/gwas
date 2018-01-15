@@ -143,11 +143,27 @@ plink --bfile PLINK_FILENAME --maf 0.01 -hwe 0.000001 --make-bed --out PLINK_FIL
 
 #---------------------------------------------------------------------------------------------------------------------------------------------------------------
 #GENOTYPE RECODING
-#create snplist
-~/remove_extra_spaces.sh PLINK_FILENAME_filtered.bim | cut -d ' ' -f2 > snplist
+#create folder for each chromosome to split by 5000 snps
+for number `seq 1 1 22`
+do
+mkdir chr$number
+done
+
+
+#create snplist for each chr
+for number `seq 1 22`
+do 
+~/remove_extra_spaces.sh chr{number}_PLINK_FILENAME_filtered.bim | cut -d ' ' -f2 > chr{number}_snplist
+done
+
 #split by 5000
-split -5000 -a 3 ./snplist ./Split_Files/FILENAME_split_
-#recodeA
+for number `seq 1 22`
+do
+split -5000 -a 3 ./chr{number}_snplist ./Split_Files/FILENAME_split_
+done
+
+#recodeA each file
+#USE A FOR LOOP IF NECESSARY
 ./code_genotypes.sh
 #---------------------------------------------------------------------------------------------------------------------------------------------------------------
 

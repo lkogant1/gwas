@@ -1,0 +1,5 @@
+#METAL REQUIRES rsid, MAF, CHR, BP, A1, A2, BETA, SE, P - FROM ALL DATASETS
+module load metal
+metal COMBINED_FILE_OF_DATASETS_PHEN_Metal.txt #COMBINED FILE OF ALL DATASETS FOR A SPECIFIC PHENOTYPE
+/remove_extra_spaces.txt METAANALYSIS1.TBL > META_PHEN_all
+sort -g -k10,10 META_PHEN_all > META_logmaxd_all_sorted #RESULTS
