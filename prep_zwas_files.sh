@@ -139,4 +139,15 @@ emacs -nw merge_list_DataSetName
 #format chr2_DataSetName_bg.bed chr2_DataSetName_bg.bim chr2_DataSetName_bg.fam
 plink --bfile chr1_DataSetName_bg --merge-list merge_list_DataSetName --make-bed --out DataSetName_imputed_12012015
 plink --bfile chr1_DataSetName_clean --merge-list merge_list_DataSetName --make-bed --out DataSetName_imputed_cleaned
+plink --bfile PLINK_FILENAME --maf 0.01 -hwe 0.000001 --make-bed --out PLINK_FILENAME_filtered
+
 #---------------------------------------------------------------------------------------------------------------------------------------------------------------
+#GENOTYPE RECODING
+#create snplist
+~/remove_extra_spaces.sh PLINK_FILENAME_filtered.bim | cut -d ' ' -f2 > snplist
+#split by 5000
+split -5000 -a 3 ./snplist ./Split_Files/FILENAME_split_
+#recodeA
+./code_genotypes.sh
+#---------------------------------------------------------------------------------------------------------------------------------------------------------------
+
