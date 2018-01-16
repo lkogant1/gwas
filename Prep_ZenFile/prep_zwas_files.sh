@@ -66,6 +66,7 @@ do
 plink --bfile datae --chr $W --make-bed --out /PATH/Data/Imputation/Shapeit_Check/chr$W\_shapeit_check
 done    
         
+        
 #-------------------------------
 module load shapeit/v2r790
 for number in `seq 1 22`;
