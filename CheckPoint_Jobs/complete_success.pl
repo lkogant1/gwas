@@ -1,3 +1,4 @@
+#CREAte a list of JOBS THAT RAN SUCCESSFULLY
 #!/usr/bin/perl
 use warnings;
 use File::DosGlob qw(bsd_glob);

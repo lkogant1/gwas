@@ -1,3 +1,5 @@
+#submit jobs
+#phasing using shapeit2
 #!/bin/bash
 #BSUB -J jobname
 #BSUB -P account name

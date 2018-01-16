@@ -1,3 +1,5 @@
+#imputation with impute2
+#submit jobs for each chromosome
 #!/bin/bash
 
 echo "USAGE: ./imputation_impute2.sh <chr> <start Mb for that chromosome> <end Mb for that chromosome>"

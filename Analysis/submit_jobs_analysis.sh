@@ -1,4 +1,6 @@
 #!/bin/bash
+#submit jobs
+#run association analyses
 
 for file in `ls /PATH/chr1/RecodeA/chr1_*split_*_recodeA.* | cut -d'/' -f{FILLIN} | sed 's/\.txt//g'`
 

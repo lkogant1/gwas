@@ -1,4 +1,6 @@
 #DISTRIBUTION OF A PHENOTYPE
+#check wthether it is normal 
+#if not - try log and sqrt transformations
 library(ggplot2)
 phen <- read.csv(file="PHEN_FILE",header=T)
 a1 <- ggplot(phen,aes(x=PHENOTYPE))+geom_bar() + geom_text(stat='bin',binwidth=1,aes(label=..count..),vjust=-1)+scale_y_continuous(name="Frequency",limits=c(0,3100))+scale_x_continuous(name="Counts",breaks=seq(0,21,1))+ggtitle("EA - Distribution of PHENOTYPE")+theme(plot.title = element_text(hjust = 0.5))

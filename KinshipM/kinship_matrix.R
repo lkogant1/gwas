@@ -1,5 +1,5 @@
 # ----------------------------------------------------------------------------------------------
-# KINSHIP MATRIX
+# create KINSHIP MATRIX
 
 module load R
 library(kinship)

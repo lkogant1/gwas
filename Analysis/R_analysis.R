@@ -1,5 +1,6 @@
 #expects as first parameter the input file (chromosome region) and as second parameter the file out
 
+#logistic regression
 library (GWAF)
 args = commandArgs(trailingOnly=T);
 fileIn = args[1]
@@ -9,6 +10,7 @@ geepack.lgst.batch(phenfile="x",genfile=fileIn, pedfile="x", phen='name', model=
 
 
 #-------------------------
+#linear mixed model
 library (GWAF)
 args = commandArgs(trailingOnly=T);
 fileIn = args[1]

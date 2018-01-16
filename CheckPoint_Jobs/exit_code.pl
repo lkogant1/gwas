@@ -1,3 +1,5 @@
+#SCRIPT TO IDENTIFY JOBS THAT ARE EXITED
+
 #!/usr/bin/perl
 use warnings;
 use File::DosGlob qw(bsd_glob);

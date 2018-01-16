@@ -1,3 +1,5 @@
+#JOBS THAT FAILED DUE TO MEM LIMIT OR RUN LIMIT
+
 #!/usr/bin/perl
 use warnings;
 use File::DosGlob qw(bsd_glob);
